@@ -1,25 +1,48 @@
 package main.fr.ut2j.m1ice.ootesting;
+import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.*;
+
+import java.util.Random;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-public class TestMyPoint {
+@RunWith(MockitoJUnitRunner.class)
+public class TestMyPoint 
+{
 
 	MyPoint m_PointFirst ;
 	MyPoint m_PointSecond;
 	
+	
+	@Mock
+	MyPoint m_PointMock ;
+	
+	@Rule 
+	//public MockitoRule rule = MockitoJUnit.rule();
+	
+	
+	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception 
+	{
 		m_PointFirst = new MyPoint();
 		m_PointSecond =  new MyPoint(0.5,1.0);
+		
+		m_PointMock = mock(MyPoint.class);
+		
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() throws Exception 
+	{
 		m_PointFirst = null;
 		m_PointSecond = null;
 			
@@ -27,7 +50,8 @@ public class TestMyPoint {
 	
 	//method class test for both construct One and Two 
 	@Test
-	public void testMyPoint() {
+	public void testMyPoint() 
+	{
 		
 		assertEquals(0d, m_PointFirst.getX(), 0.0001);  
 		assertEquals(0d, m_PointFirst.getY(), 0.0002);
@@ -39,19 +63,22 @@ public class TestMyPoint {
 
 	@Ignore
 	@Test
-	public void testMyPointDoubleDouble() {
+	public void testMyPointDoubleDouble() 
+	{
 		fail("Not yet implemented");
 	}
 
 	@Ignore
 	@Test
-	public void testMyPointMyPoint() {
+	public void testMyPointMyPoint() 
+	{
 		fail("Not yet implemented");
 	}
 	
 	//Method test for Set and Get X operations
 	@Test
-	public void testSetGetX() {		
+	public void testSetGetX() 
+	{		
 		m_PointFirst.setX(0.2);
 		double m_PointX = m_PointFirst.getX();
 		assertEquals(0.2, m_PointX, 0.0000);
@@ -59,7 +86,8 @@ public class TestMyPoint {
 	
 	//Method test for Set and Get Y operations
 	@Test
-	public void testSetGetY() {
+	public void testSetGetY() 
+	{
 		
 		double m_PointY = m_PointSecond.getY();
 		m_PointSecond.setY(2.05);
@@ -87,7 +115,8 @@ public class TestMyPoint {
 	
 	//method test for the Third construct Point
 	@Test
-	public void testMyPointThird() {
+	public void testMyPointThird() 
+	{
 		
 		MyPoint m_ThirdPoint  = new MyPoint(m_PointFirst); 
 		double m_ThirdPointX = m_ThirdPoint.getX(); 
@@ -99,7 +128,8 @@ public class TestMyPoint {
 	}
 	
 	@Test
-	public void testScale() {
+	public void testScale() 
+	{
 		MyPoint m_ThirdPoint = new MyPoint(m_PointSecond); 
 		double m_ThirdPointX = m_ThirdPoint.getX();
 		double m_ThirdPointY = m_ThirdPoint.getY();
@@ -109,7 +139,8 @@ public class TestMyPoint {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testHorizontalSymmetry() {
+	public void testHorizontalSymmetry() 
+	{
 		
 		MyPoint m_horizontalPoint = m_PointSecond.horizontalSymmetry(null);	
 		MyPoint m_horizontalPoint2 = m_PointSecond.horizontalSymmetry(m_PointFirst);
@@ -124,44 +155,56 @@ public class TestMyPoint {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testCentralSymmetryNULL ( ) {
+	public void testCentralSymmetryNULL ( ) 
+	{		
 	    new MyPoint ( 1.0 , 2.0 ) . centralSymmetry ( null ) ;
 	}
 
 	@Ignore
 	@Test
-	public void testComputeAngle() {
+	public void testComputeAngle() 
+	{
 		fail("Not yet implemented");
 	}
 
 	@Ignore
 	@Test
-	public void testRotatePoint() {
+	public void testRotatePoint() 
+	{
 		fail("Not yet implemented");
 	}
 
 	@Ignore
 	@Test
-	public void testCentralSymmetry() {
+	public void testCentralSymmetry() 
+	{
 		fail("Not yet implemented");
 	}
 
 	@Ignore
 	@Test
-	public void testGetMiddlePoint() {
+	public void testGetMiddlePoint() 
+	{
 		fail("Not yet implemented");
 	}
 
 	@Ignore
 	@Test
-	public void testTranslateDoubleDouble() {
+	public void testTranslateDoubleDouble() 
+	{
 		fail("Not yet implemented");
 	}
 
-	@Ignore
-	@Test
-	public void testSetPoint() {
-		fail("Not yet implemented");
+	
+	@Test	
+	public void testSetPoint() 
+	{	
+		MyPoint m_Point = new MyPoint();
+		
+		Random m_RandomOne = new Random();
+		Random m_RandomTwo = new Random(); 
+		//when(m_PointMock.setPoint(m_RandomOne, m_RandomTwo)); 
+		
 	}
 
 	@Ignore

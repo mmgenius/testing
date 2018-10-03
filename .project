@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>target/pom.xml</name>
+			<type>1</type>
+			<location>C:/Users/mamadou.mendy/Downloads/pom.xml.txt</location>
+		</link>
+	</linkedResources>
 </projectDescription>
