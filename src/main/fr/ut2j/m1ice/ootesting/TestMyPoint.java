@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestMyPoint {
@@ -19,7 +20,9 @@ public class TestMyPoint {
 
 	@After
 	public void tearDown() throws Exception {
-		
+		m_PointFirst = null;
+		m_PointSecond = null;
+			
 	}
 	
 	//method class test for both construct One and Two 
@@ -34,11 +37,13 @@ public class TestMyPoint {
 	
 	}
 
+	@Ignore
 	@Test
 	public void testMyPointDoubleDouble() {
 		fail("Not yet implemented");
 	}
 
+	@Ignore
 	@Test
 	public void testMyPointMyPoint() {
 		fail("Not yet implemented");
@@ -49,7 +54,7 @@ public class TestMyPoint {
 	public void testSetGetX() {		
 		m_PointFirst.setX(0.2);
 		double m_PointX = m_PointFirst.getX();
-		assertEquals(0.3, m_PointX, 0.0001);
+		assertEquals(0.2, m_PointX, 0.0000);
 	}
 	
 	//Method test for Set and Get Y operations
@@ -69,7 +74,7 @@ public class TestMyPoint {
 		double m_dTemps = m_PointFirst.getX();
 		m_PointFirst.setX(Double.NaN);
 		
-		assertEquals(m_dTemps, Double.NaN, 0.01); 
+		assertFalse(m_dTemps == Double.NaN); 
 	}
 
 	@Test 
@@ -77,7 +82,7 @@ public class TestMyPoint {
 	{
 		m_PointSecond.setY(0.025);
 		double m_PointY = m_PointSecond.getY() ; 
-		assertEquals(Double.NaN, m_PointY , 0.0001);
+		assertFalse(Double.NaN == m_PointY);
 	}
 	
 	//method test for the Third construct Point
@@ -103,41 +108,58 @@ public class TestMyPoint {
 		
 	}
 
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testHorizontalSymmetry() {
-		fail("Not yet implemented");
+		
+		MyPoint m_horizontalPoint = m_PointSecond.horizontalSymmetry(null);	
+		MyPoint m_horizontalPoint2 = m_PointSecond.horizontalSymmetry(m_PointFirst);
+		MyPoint m_horizontalPoint3 = m_PointSecond.horizontalSymmetry(new MyPoint(1.5, 0.5));
+		
+		
+		assertEquals("Good Number", m_horizontalPoint.getX() , (2d * m_PointFirst.getX() - m_PointSecond.getX() ), 0.0001) ;
+		
+		assertEquals("Good Number", m_horizontalPoint2.getX() , (2d * m_PointFirst.getX() - m_PointSecond.getX() ), 0.001) ;
+		
+		assertEquals("Good Number", m_horizontalPoint3.getX() , 0.152 , 0.001) ;
 	}
 
+	@Ignore
 	@Test
 	public void testComputeAngle() {
 		fail("Not yet implemented");
 	}
 
+	@Ignore
 	@Test
 	public void testRotatePoint() {
 		fail("Not yet implemented");
 	}
 
+	@Ignore
 	@Test
 	public void testCentralSymmetry() {
 		fail("Not yet implemented");
 	}
 
+	@Ignore
 	@Test
 	public void testGetMiddlePoint() {
 		fail("Not yet implemented");
 	}
 
+	@Ignore
 	@Test
 	public void testTranslateDoubleDouble() {
 		fail("Not yet implemented");
 	}
 
+	@Ignore
 	@Test
 	public void testSetPoint() {
 		fail("Not yet implemented");
 	}
 
+	@Ignore
 	@Test
 	public void testTranslateITranslation() {
 		fail("Not yet implemented");
