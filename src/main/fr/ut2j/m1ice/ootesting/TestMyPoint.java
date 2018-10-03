@@ -122,6 +122,11 @@ public class TestMyPoint {
 		
 		assertEquals("Good Number", m_horizontalPoint3.getX() , 0.152 , 0.001) ;
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testCentralSymmetryNULL ( ) {
+	    new MyPoint ( 1.0 , 2.0 ) . centralSymmetry ( null ) ;
+	}
 
 	@Ignore
 	@Test
