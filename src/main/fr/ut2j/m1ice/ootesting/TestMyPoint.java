@@ -25,7 +25,7 @@ public class TestMyPoint
 	@Mock
 	MyPoint m_PointMock ;
 	
-	@Rule 
+	
 	//public MockitoRule rule = MockitoJUnit.rule();
 	
 	
