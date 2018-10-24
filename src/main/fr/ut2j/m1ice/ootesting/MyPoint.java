@@ -43,8 +43,7 @@ public class MyPoint {
 	public MyPoint(final MyPoint pt) {
 		this(pt.x, pt.y);
 	}
-
-
+	
 	/**
 	 * Sets the X coordinate of the point.
 	 * @param newX The new X coordinate. Must be valid (not equal Double.NaN), otherwise nothing is done.
@@ -75,7 +74,6 @@ public class MyPoint {
 	public double getX() {
 		return x;
 	}
-
 
 	/**
 	 * @return The Y coordinate of the point.
@@ -228,15 +226,10 @@ public class MyPoint {
 	 * @param random1 The random number generator used for x.
 	 * @param random2 The random number generator used for y.
 	 */
-	public boolean setPoint(final Random random1, final Random random2) {
-		
-		double m_XPoint = this.getX();
-		double m_YPoint = this.getY();
+	public void setPoint(final Random random1, final Random random2) {
 		
 		setX(random1.nextInt());
-		setY(random2.nextInt());
-		
-		return ((m_XPoint != this.getX() || m_YPoint != this.getY() ? true : false));
+		setY(random2.nextInt());				
 	}
 
 

@@ -1,6 +1,6 @@
 package main.fr.ut2j.m1ice.ootesting;
 import static org.mockito.Mockito.*;
-
+import static java.lang.Math.atan;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-
+@RunWith (MockitoJUnitRunner.class)
 public class TestMyPoint 
 {
 
@@ -26,6 +26,11 @@ public class TestMyPoint
 	@Mock
 	MyPoint m_PointMock ;
 	
+	@Mock
+	Random m_RandomOne ; 
+	
+	@Mock 
+	Random m_RandomTwo  ; 
 	
 	//public MockitoRule rule = MockitoJUnit.rule();
 	
@@ -38,6 +43,9 @@ public class TestMyPoint
 		m_PointSecond =  new MyPoint(0.5,1.0);
 		
 		m_PointMock = mock(MyPoint.class);
+		m_RandomOne = mock(Random.class);
+		m_RandomTwo = mock(Random.class);
+		
 		
 	}
 
@@ -92,9 +100,10 @@ public class TestMyPoint
 	@Test 
 	public void testSetY() 
 	{
-		m_PointSecond.setY(0.025);
 		double m_PointY = m_PointSecond.getY() ; 
-		assertFalse(Double.NaN == m_PointY);
+		m_PointSecond.setY(0.025);
+		
+		assertFalse(m_PointY == Double.NaN);
 	}
 	
 	//method test for the Third construct Point
@@ -152,7 +161,7 @@ public class TestMyPoint
                     MyPoint myNewPoint = new MyPoint(3.0, 7.0).centralSymmetry(null);
                 });
 		
-		MyPoint m_centrePoint = new MyPoint(0.0, 3.5);f
+		MyPoint m_centrePoint = new MyPoint(0.0, 3.5);
 		MyPoint myNewPointTwo = new MyPoint(3.5, 7.0).centralSymmetry(m_centrePoint);
 		
 		
@@ -162,16 +171,57 @@ public class TestMyPoint
 	@Test	
 	public void testSetPoint() 
 	{	
-		Random m_RandomOne = new Random();
-		Random m_RandomTwo = new Random(); 
-		when(m_PointMock.setPoint(m_RandomOne, m_RandomTwo)).thenReturn(true); 
-		
+		 when(m_RandomOne.nextInt()).thenReturn(15);
+		 when(m_RandomTwo.nextInt()).thenReturn(11);
+		 
+		 MyPoint m_SetPoint = new MyPoint();
+		 m_SetPoint.setPoint(m_RandomOne, m_RandomTwo);
+		 
+		 assertEquals(m_SetPoint.getX(), 15, 0.001);
+		 		
 	}
 
-	@Ignore
+	
 	@Test
 	public void testTranslateITranslation() {
-		fail("Not yet implemented");
+		
+		ITranslation m_translation = mock(ITranslation.class);
+		when(m_translation.getTx()).thenReturn(12);
+		when(m_translation.getTy()).thenReturn(14);
+		
+		MyPoint m_translationPoint = new MyPoint(3, 2.5);
+		m_translationPoint.translate(m_translation);
+		
+		assertEquals(m_translationPoint.getX(), 15, 0.0001);
+		//m_translationPoint.translate(new );
+		
+	}
+	
+	@Test
+	public void testGetMiddlePoint() {
+		MyPoint m_newPoint = new MyPoint(4, 2.2); 
+		MyPoint m_pointOrigin = new MyPoint(3, 10); 
+		
+		MyPoint m_pointResult = m_pointOrigin.getMiddlePoint(m_newPoint);
+		
+		assertEquals(m_pointResult.getX(), 3.5, 0.001);
+	}
+	
+	@Test
+	public void testComputeAngle() {
+		
+		MyPoint m_pointToCompute = new MyPoint(2.5, 7);
+		MyPoint m_pointJoker = new MyPoint(2.499d, 6); 
+		
+		Double m_X2 = m_pointJoker.getX() - m_pointToCompute.getX();
+		Double m_Y2 = m_pointJoker.getY() - m_pointToCompute.getY();
+		
+		Double angleTypeOne = m_X2 < 0d ? Math.PI - atan(-m_Y2 / m_X2) : atan(m_Y2 / m_X2);
+				
+		Double m_angleResult = m_pointToCompute.computeAngle(m_pointJoker);
+		
+		assertEquals(angleTypeOne, m_angleResult, 0.0001);
+		
 	}
 
 }
