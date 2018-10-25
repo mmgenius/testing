@@ -141,7 +141,7 @@ public class TestMyPoint
 		MyPoint m_pointSys = new MyPoint(2.0, 1.0);		
 		assertThrows(IllegalArgumentException.class,
                 () -> {
-                	MyPoint m_horizontalSymPoint = m_pointSys.horizontalSymmetry(m_originPoint);
+                	m_pointSys.horizontalSymmetry(m_originPoint);
                 });
 		
 		final MyPoint m_originePointTwo = new MyPoint(2.5, 3.0);
@@ -158,13 +158,12 @@ public class TestMyPoint
 	{
 		assertThrows(IllegalArgumentException.class,
                 () -> {
-                    MyPoint myNewPoint = new MyPoint(3.0, 7.0).centralSymmetry(null);
+                    new MyPoint(3.0, 7.0).centralSymmetry(null);
                 });
 		
 		MyPoint m_centrePoint = new MyPoint(0.0, 3.5);
-		MyPoint myNewPointTwo = new MyPoint(3.5, 7.0).centralSymmetry(m_centrePoint);
-		
-		
+		new MyPoint(3.5, 7.0).centralSymmetry(m_centrePoint);
+				
 		//assertEquals(myNewPointTwo.getY(), , 0.0001)
 	}
 	
